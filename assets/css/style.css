@@ -1,11 +1,581 @@
+/*=============== GOOGLE FONTS - Insert link for typography ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400..900&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+    --header-height: 3.5rem;
+
+    /*========== Colors ==========*/
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --pink-color: hsl(330, 84%, 70%);
+    --pink-color-light: hsl(330, 84%, 90%);
+    --lilac-color: hsl(260, 84%, 70%);
+    --lilac-color-light: hsl(249, 84%, 90%);
+    --lightblue-color: hsl(200, 82%, 59%);
+    --lightblue-color-light: hsl(195, 82%, 90%);
+    --white-color: hsl(0, 0%, 100%);
+
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Montserrat", sans-serif;
+    --biggest-font-size: 5rem;
+    --bigger-font-size: 2rem;
+    --big-font-size: 1.5rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+    --font-extra-bold: 800;
+    --font-black: 900;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media (width >= 1150px) {
+    :root {
+        --biggest-font-size: 12rem;
+        --bigger-font-size: 3.5rem;
+        --big-font-size: 2rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: 0.875rem;
+        --smaller-font-size: 0.813rem;
+    }
+}
+
+/*=============== BASE ===============*/
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+button {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    color: var(--white-color);
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--white-color);
+    font-weight: var(--font-extra-bold);
+    line-height: 100%;
+}
+
+ul {
     list-style: none;
-    list-style-type: none;
 }
 
 a {
     text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+    max-width: 1120px;
+    margin-inline: 1rem;
+}
+
+.main {
+    overflow: hidden;
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
+
+.nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.25rem;
+    color: var(--white-color);
+    font: var(--font-extra-bold) var(--h3-font-size) var(--body-font);
+    letter-spacing: 0.08rem;
+}
+
+.nav__logo i {
+    font-size: 1.5rem;
+    font-weight: initial;
+}
+
+.nav__toggle {
+    display: flex;
+    color: var(--white-color);
+    font-size: 1.5rem;
+}
+
+/* Navigation for mobile devices <> */
+@media (width <= 1150px) {
+    .nav__menu {
+        position: fixed;
+        top: -120%;
+        left: 0;
+        width: 100%;
+        background-color: hsla(0, 0%, 0%, 0.05);
+        backdrop-filter: blur(16px);
+        padding-block: 4rem;
+        z-index: var(--z-fixed);
+        transition: top 0.4s;
+    }
+}
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1.5rem;
+}
+
+.nav__link {
+    color: var(--white-color);
+    font-weight: var(--font-semi-bold);
+}
+
+.nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    color: var(--white-color);
+    font-size: 1.5rem;
+}
+
+/* Show menu */
+.show-menu {
+    top: 0;
+}
+
+/* Change header styles */
+.scroll-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: hsla(0, 0%, 0%, 0.05);
+    backdrop-filter: blur(16px);
+    z-index: -1;
+}
+
+/*=============== HOME ===============*/
+.home {
+    position: relative;
+}
+
+.home__slide {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.home__container {
+    position: relative;
+    height: 100%;
+}
+
+.home__slide-pink {
+    background-color: var(--pink-color);
+}
+.home__slide-lilac {
+    background-color: var(--lilac-color);
+}
+.home__slide-blue {
+    background-color: var(--lightblue-color);
+}
+
+.home__glow,
+.home__titles,
+.home__img,
+.home__card {
+    position: absolute;
+}
+
+.home__glow {
+    width: 344px;
+    height: 344px;
+    border-radius: 50%;
+
+    left: 0;
+    bottom: 18.75rem;
+
+    background-color: var(--white-color);
+
+    opacity: 0.5;
+    filter: blur(60px);
+}
+
+.home__img {
+    width: 290px;
+    right: -0.5rem;
+    bottom: 0;
+
+    mask-image: linear-gradient(
+        to bottom,
+        hsl(0, 0%, 0%) 70%,
+        transparent 100%
+    );
+}
+
+.home__card {
+    width: 180px;
+    right: 0;
+    bottom: 3.25rem;
+}
+
+.home__card-img {
+    position: relative;
+    height: 96px;
+    overflow: hidden;
+}
+
+.home__card-model {
+    width: 60px;
+    margin: 0.5rem auto 0;
+}
+
+.home__card-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 40px;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--white-color);
+    font-size: 1.5rem;
+}
+
+.home__slide-pink .home__card-img {
+    background-color: var(--lilac-color-light);
+}
+.home__slide-pink .home__card-button {
+    background-color: var(--lilac-color);
+}
+
+.home__slide-lilac .home__card-img {
+    background-color: var(--lightblue-color-light);
+}
+.home__slide-lilac .home__card-button {
+    background-color: var(--lightblue-color);
+}
+
+.home__slide-blue .home__card-img {
+    background-color: var(--pink-color-light);
+}
+.home__slide-blue .home__card-button {
+    background-color: var(--pink-color);
+}
+
+.home__card-data {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    margin-top: 0.5rem;
+}
+
+.home__card-number {
+    font-size: var(--bigger-font-size);
+    font-weight: var(--font-extra-bold);
+}
+
+.home__card-description {
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-semi-bold);
+    text-transform: uppercase;
+}
+
+.home__titles {
+    left: 0;
+    bottom: 25.75rem;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.home__title,
+.home__subtitle {
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+}
+
+.home__subtitle {
+    font-size: var(--bigger-font-size);
+    font-weight: var(--font-extra-bold);
+}
+
+.home__title {
+    font-size: var(--biggest-font-size);
+    font-weight: var(--font-black);
+    color: hsla(0, 0%, 100%, 0.6);
+}
+
+.home__controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 100vh;
+    pointer-events: none;
+    z-index: var(--z-tooltip);
+}
+
+.home__number,
+.home__count,
+.home__button,
+.home__social {
+    position: absolute;
+    pointer-events: initial;
+}
+
+.home__number {
+    left: 15rem;
+    bottom: 37.75rem;
+    font-size: var(--bigger-font-size);
+    font-weight: var(--font-extra-bold);
+    overflow: hidden;
+}
+
+.home__count {
+    left: 0;
+    bottom: 3rem;
+    overflow: hidden;
+}
+
+.home__number-text,
+.home__count-text {
+    display: block;
+}
+
+.home__button {
+    bottom: 20.25rem;
+
+    display: flex;
+    color: var(--white-color);
+    font-size: 2.5rem;
+}
+
+.home__button-prev {
+    left: 0;
+}
+
+.home__button-next {
+    right: 0;
+}
+
+.home__social {
+    left: 0;
+    bottom: 7.5rem;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.home__social-link {
+    display: flex;
+    color: var(--white-color);
+    font-size: 1.25rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices <> */
+@media (width <= 370px) {
+    .home__img {
+        width: 240px;
+    }
+}
+
+/* For medium devices <> */
+@media (width >= 540px) {
+    .home__container,
+    .home__controls {
+        max-width: 450px;
+        margin-inline: auto;
+    }
+
+    .home__img {
+        right: 3rem;
+    }
+}
+
+@media (width >= 768px) {
+    .home__container,
+    .home__controls {
+        max-width: 750px;
+        margin-inline: auto;
+    }
+
+    .home__img {
+        right: 16rem;
+    }
+}
+
+/* For large devices <> */
+@media (width >= 1150px) {
+    .container {
+        margin-inline: auto;
+    }
+
+    .nav {
+        height: calc(var(--header-height) + 2rem);
+    }
+    .nav__toggle,
+    .nav__close {
+        display: none;
+    }
+    .nav__logo {
+        column-gap: 0.5rem;
+    }
+    .nav__list {
+        flex-direction: row;
+        column-gap: 4rem;
+    }
+
+    .home__container,
+    .home__controls {
+        max-width: 1120px;
+        height: 860px;
+    }
+
+    .home__slide {
+        height: 860px;
+    }
+
+    .home__glow {
+        width: 640px;
+        height: 640px;
+
+        left: 17.5rem;
+        bottom: 5rem;
+
+        filter: blur(100px);
+    }
+
+    .home__titles {
+        left: 9rem;
+        bottom: 7.5rem;
+    }
+
+    .home__img {
+        width: 400px;
+        left: 24.5rem;
+        right: initial;
+    }
+
+    .home__number {
+        left: 27.5rem;
+        bottom: 39rem;
+    }
+
+    .home__card {
+        width: 288px;
+        bottom: 4.5rem;
+    }
+
+    .home__card-img {
+        height: 152px;
+    }
+
+    .home__card-model {
+        width: 96px;
+    }
+
+    .home__card-button {
+        width: 56px;
+        font-size: 2rem;
+    }
+
+    .home__card-data {
+        column-gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .home__count {
+        bottom: 4rem;
+    }
+
+    .home__button {
+        bottom: 25.5rem;
+        font-size: 3.5rem;
+    }
+
+    .home__social {
+        left: 9rem;
+        bottom: 4rem;
+        flex-direction: row;
+        column-gap: 1.5rem;
+    }
+
+    .home__social-link {
+        font-size: 1.5rem;
+    }
+}
+
+/* For lower-end devices <> */
+@media (width <= 420px) and (height <= 720px) {
+    .home__container,
+    .home__controls,
+    .home__slide {
+        height: 780px;
+    }
+}
+
+/* For taller devices <> */
+@media (width >= 1536px) and (height >= 864px) {
+    .home__container,
+    .home__controls,
+    .home__slide {
+        height: 100vh;
+    }
 }
